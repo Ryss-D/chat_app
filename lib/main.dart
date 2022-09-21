@@ -1,5 +1,6 @@
 import 'package:chat_app/screens/auth_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import './screens/chat_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
           // Once complete, show your application
           if (snapshot.connectionState == ConnectionState.done) {
             return MaterialApp(
+              debugShowCheckedModeBanner: false,
               title: 'FlutterChat',
               theme: ThemeData(
                 backgroundColor: Colors.orange,
@@ -44,10 +46,18 @@ class MyApp extends StatelessWidget {
                   secondary: Colors.deepOrange,
                 ),
               ),
-              home: AuthScreen(),
+              home: StreamBuilder(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: ((ctx, userSnapshot) {
+                  if (userSnapshot.hasData) {
+                    return ChatScreen();
+                  }
+                  return AuthScreen();
+                }),
+              ),
             );
           } else {
-            return Container();
+            return CircularProgressIndicator();
           }
         });
   }
