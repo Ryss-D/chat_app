@@ -6,7 +6,7 @@ class Messages extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: FirebaseFirestore.instance
-          .collection('chats')
+          .collection('chat')
           .orderBy(
             'createdAt',
             descending: true,
