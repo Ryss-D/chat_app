@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:chat_app/widgets/auth/auth_form.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
@@ -16,7 +19,12 @@ class _AuthScreenState extends State<AuthScreen> {
   var _isLoading = false;
 
   void _submitAuthForm(
-      String email, String password, String username, bool isLogin) async {
+    String email,
+    String password,
+    String username,
+    File image,
+    bool isLogin,
+  ) async {
     UserCredential authResult;
     try {
       setState(() {
@@ -28,6 +36,17 @@ class _AuthScreenState extends State<AuthScreen> {
       } else {
         authResult = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
+
+        //ref give us the path to acces the main storage bucket of firebase
+        final ref = FirebaseStorage.instance
+            .ref()
+            .child('user_images')
+            .child('${authResult.user?.uid}.jpg');
+        //The code above just creace the reference to the image
+
+        // with this commad we update the file
+        await ref.putFile(image);
+
         await FirebaseFirestore.instance
             .collection('users')
             .doc(authResult.user?.uid)
