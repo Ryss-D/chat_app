@@ -5,10 +5,12 @@ class MessageBubble extends StatelessWidget {
   final Key key;
   final String message;
   final String userId;
+  final String imageUrl;
   final bool isMe;
   MessageBubble({
     required this.message,
     required this.userId,
+    required this.imageUrl,
     required this.isMe,
     required this.key,
   });
@@ -18,6 +20,9 @@ class MessageBubble extends StatelessWidget {
         mainAxisAlignment:
             isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: [
+          CircleAvatar(
+            backgroundImage: NetworkImage(imageUrl),
+          ),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
