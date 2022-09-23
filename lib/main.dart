@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
                 colorScheme: ColorScheme.fromSwatch(
                   primarySwatch: Colors.orange,
                 ).copyWith(
-                  secondary: Colors.deepOrange,
+                  secondary: Colors.deepOrange[200],
                 ),
               ),
               home: StreamBuilder(

@@ -11,9 +11,9 @@ class NewMessage extends StatefulWidget {
 class _NewMessageState extends State<NewMessage> {
   final _controller = new TextEditingController();
   String _enteredMessage = '';
-  void _sendMessage() async {
+  void _sendMessage() {
     FocusScope.of(context).unfocus();
-    final user = await FirebaseAuth.instance.currentUser;
+    final user = FirebaseAuth.instance.currentUser;
     FirebaseFirestore.instance.collection('chat').add(
       {
         'text': _enteredMessage,
