@@ -16,7 +16,12 @@ class _UserImagePickerState extends State<UserImagePicker> {
   var _userImageFile;
   void _pickUserImage() async {
     final _picker = ImagePicker();
-    final _pickedImage = await _picker.pickImage(source: ImageSource.gallery);
+    final _pickedImage = await _picker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 50,
+      maxWidth: 150,
+      maxHeight: 150,
+    );
     if (_pickedImage != null) {
       //return Navigator.of(context).pop();
       //}
