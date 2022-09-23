@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class MessageBubble extends StatelessWidget {
   final Key key;
   final String message;
+  final String userId;
   final bool isMe;
   MessageBubble({
     required this.message,
+    required this.userId,
     required this.isMe,
     required this.key,
   });
@@ -36,8 +39,36 @@ class MessageBubble extends StatelessWidget {
               vertical: 4,
               horizontal: 8,
             ),
-            child: Text(
-              message,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //Firestore automatically caches data locally
+                FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                  future: FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(userId)
+                      .get(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Text(
+                        'Loading...',
+                        style: TextStyle(
+                          fontSize: 11,
+                        ),
+                      );
+                    }
+                    return Text(
+                      snapshot.data!['username'],
+                      style: TextStyle(
+                        fontSize: 11,
+                      ),
+                    );
+                  },
+                ),
+                Text(
+                  message,
+                ),
+              ],
             ),
           ),
         ]);
