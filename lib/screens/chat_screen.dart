@@ -19,6 +19,11 @@ class _ChatScreenState extends State<ChatScreen> {
     FirebaseMessaging.instance.requestPermission();
     //TODO review if config is needed
     //FirebaseMessaging.instance.confiture
+    //Thigs to do with messages
+    //print(FirebaseMessaging.onMessage);
+    //print(FirebaseMessaging.onMessageOpenedApp);
+    //print(FirebaseMessaging.onBackgroundMessage((message) => print('message')));
+    //also exist toher methos, one of them "oh terminated"
     super.initState();
   }
 
