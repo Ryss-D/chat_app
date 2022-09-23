@@ -22,7 +22,7 @@ class _AuthScreenState extends State<AuthScreen> {
     String email,
     String password,
     String username,
-    File image,
+    File? image,
     bool isLogin,
   ) async {
     UserCredential authResult;
@@ -45,7 +45,7 @@ class _AuthScreenState extends State<AuthScreen> {
         //The code above just creace the reference to the image
 
         // with this commad we update the file
-        await ref.putFile(image);
+        await ref.putFile(image!);
 
         final imageUrl = await ref.getDownloadURL();
 

@@ -9,7 +9,7 @@ class AuthForm extends StatefulWidget {
     String email,
     String password,
     String username,
-    File image,
+    File? image,
     bool isLogin,
   ) submitFn;
   final isLoading;
