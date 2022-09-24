@@ -24,6 +24,11 @@ class _ChatScreenState extends State<ChatScreen> {
     //print(FirebaseMessaging.onMessageOpenedApp);
     //print(FirebaseMessaging.onBackgroundMessage((message) => print('message')));
     //also exist toher methos, one of them "oh terminated"
+    //with this every change of a specific colelction, in this case chat we ewill recive notfications for this
+    FirebaseMessaging.instance.subscribeToTopic('chat');
+    //we could request the token onspecific devicew
+    //and pass it to de db and then scope specif devices for notifications
+    //ieg for chat between two people
     super.initState();
   }
 
