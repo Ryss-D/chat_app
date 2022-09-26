@@ -7,7 +7,9 @@ const admin = require("firebase-admin");
 //   functions.logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
-admin.initializeApp();
+admin.initializeApp(
+// add eviroment variables for authentication
+);
 
 exports.myFunction = functions.firestore
     .document("chat/{message}")
